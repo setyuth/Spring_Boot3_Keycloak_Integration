@@ -1,5 +1,6 @@
 package com.springboot.keycloak.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,11 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoController {
 
     @GetMapping
+    @PreAuthorize("hasRole('client_user')")
     public String hello(){
         return "Hello World from spring boot 3 Keycloak Integration";
     }
 
     @GetMapping("/hello-2")
+    @PreAuthorize("hasRole('client_admin')")
     public String hello2(){
         return "Hello World from spring boot 3 Keycloak Integration - ADMIN";
     }
